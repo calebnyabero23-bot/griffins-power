@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCN | Next-Gen Tech & Gadgets</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-nav">
+            <div class="logo" onclick="showPage('home')">
+                <span class="ncn-text">NCN</span>
+                <small>Next-Gen Tech & Gadgets</small>
+            </div>
+            <div class="search-wrap">
+                <input type="text" id="searchInput" placeholder="Search for products...">
+                <button onclick="searchProduct()"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="user-icons">
+                <div onclick="showPage('login')"><i class="fa fa-user"></i><p>Login</p></div>
+                <div><i class="fa fa-heart"></i><p>Wishlist</p></div>
+                <div class="cart-btn" onclick="showPage('cart')">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                    <p>Cart</p>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Shop <i class="fa fa-chevron-down"></i></a></li>
+                <li><a href="#">Deals <i class="fa fa-chevron-down"></i></a></li>
+                <li><a href="#" onclick="showPage('about')">About Us <i class="fa fa-chevron-down"></i></a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="page active">
+            <div class="hero-banner">
+                <div class="hero-text">
+                    <h4>LATEST TECH TRENDS</h4>
+                    <h1>UPGRADE YOUR GEAR</h1>
+                    <p>Best Deals on All the Newest Gadgets!</p>
+                    <button class="shop-now-btn" onclick="showPage('products')">SHOP NOW</button>
+                </div>
+                <div class="hero-img">
+                    <img src="https://i.ibb.co/mS6S0f3/hero-devices.png" alt="Tech Gear">
+                </div>
+            </div>
+
+            <div class="features-bar">
+                <div class="f-item"><i class="fa fa-truck"></i> <div><strong>Free Shipping</strong><small>On Orders Over $100</small></div></div>
+                <div class="f-item"><i class="fa fa-headset"></i> <div><strong>24/7 Support</strong><small>We're Here to Help</small></div></div>
+                <div class="f-item"><i class="fa fa-sync"></i> <div><strong>Easy Returns</strong><small>30-Day Guarantee</small></div></div>
+            </div>
+
+            <h2 class="sec-title">Featured Products</h2>
+            <div class="product-grid" id="featuredGrid"></div>
+
+            <h2 class="sec-title">Shop by Category</h2>
+            <div class="cat-grid">
+                <div class="cat-card" onclick="filterCategory('Smartphones')">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300" alt="Phones">
+                    <div class="cat-label">Smartphones</div>
+                </div>
+                <div class="cat-card" onclick="filterCategory('Laptops')">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" alt="Laptops">
+                    <div class="cat-label">Laptops</div>
+                </div>
+                <div class="cat-card" onclick="filterCategory('Wearables')">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Watches">
+                    <div class="cat-label">Wearables</div>
+                </div>
+                <div class="cat-card" onclick="filterCategory('Audio')">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" alt="Audio">
+                    <div class="cat-label">Audio</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="page">
+            <h2 class="sec-title">All Products</h2>
+            <div class="product-grid" id="allProductsGrid"></div>
+        </section>
+
+        <section id="cart" class="page">
+            <h2 class="sec-title">Your Shopping Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total-box">
+                <h3>Total: KES <span id="totalPrice">0</span></h3>
+                <button class="shop-now-btn" onclick="showPage('checkout')">Proceed to Checkout</button>
+            </div>
+        </section>
+
+        <section id="admin" class="page">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <button class="logout-btn" onclick="showPage('home')">Logout</button>
+            </div>
+            <div class="admin-container">
+                <div class="admin-box">
+                    <h3>Add New Product</h3>
+                    <input type="text" id="admName" placeholder="Product Name">
+                    <input type="number" id="admPrice" placeholder="Price">
+                    <input type="text" id="admImg" placeholder="Image URL">
+                    <select id="admCat">
+                        <option value="Smartphones">Smartphones</option>
+                        <option value="Laptops">Laptops</option>
+                        <option value="Wearables">Wearables</option>
+                        <option value="Audio">Audio</option>
+                    </select>
+                    <button class="shop-now-btn" onclick="adminAddProduct()">Upload Product</button>
+                </div>
+                <div class="admin-box">
+                    <h3>Orders Received</h3>
+                    <div id="adminOrders">No new orders.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="login" class="page">
+            <div class="login-card">
+                <h2>Login</h2>
+                <input type="text" id="loginUser" placeholder="Username">
+                <input type="password" id="loginPass" placeholder="Password">
+                <button class="shop-now-btn" onclick="handleLogin()">Sign In</button>
+                <p id="loginErr" style="color:red; margin-top:10px"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>NCN SHOP &copy; 2024. Next-Gen Tech & Gadgets.</p>
+        <p>Email: calebnyabero23@gmail.com | WhatsApp: 0768766155</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
